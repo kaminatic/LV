@@ -228,12 +228,10 @@
             quizContainer.style.display = "none";
         });
         
-        // Multiple Choice Buttons (all correct)
-        const buttons = document.querySelectorAll('.choice-button');
-        buttons.forEach(button => {
-            button.addEventListener('click', () => {
-                alert("Correct!");
-            });
+        // Trigger quiz start when any choice button is clicked
+        const choiceButtons = document.querySelectorAll('.choice-button');
+        choiceButtons.forEach(button => {
+            button.addEventListener('click', startQuiz);
         });
     </script>
 </body>
