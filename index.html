@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown Page</title>
+    <title>Countdown and Quiz Page</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -72,17 +72,49 @@
             background-color: #FF6F91;
         }
 
+        #quiz-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #quiz-feedback {
+            font-size: 1.5em;
+            margin-top: 20px;
+            color: #FFDA44;
+        }
+
+        .give-up-btn {
+            background-color: #FF7F7F;
+            font-size: 1.2em;
+            color: white;
+            padding: 15px 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        .give-up-btn:hover {
+            background-color: #FF6F91;
+        }
+
+        #post-malone-img {
+            display: none;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <div id="countdown-container">
         <img src="images/1st.png" alt="Image" id="main-image">
-        <h1>Welcome to my e-postcard for your DAY! Your Birthday is in:</h1>
+        <h1>Welcome to my e-postcard for your DAY!<h1>
+            
+        </h1> Your Birthday is in:</h1>
         <p id="countdown"></p>
         <h1>A little Ode to you</h1>
         <!-- Poem Section -->
         <div class="poem">
-           <p>For Lara, on her 24th birthday, April 24th, 2025</p>
 
     <p>We danced through Hello Fridays, costumes bold,</p>
     <p>Romanoff and Croft, legends retold.</p>
@@ -132,6 +164,20 @@
             <button class="choice-button">Ja!</button>
         </div>
     </div>
+ <div id="quiz-container">
+        <h2>Let’s Start the Quiz!</h2>
+        <p id="question">What is the name of the persona that you are assigned in my contacts with a small ajustment?</p>
+        <div class="choices">
+            <button class="choice-button" data-answer="wrong">Marco</button>
+            <button class="choice-button" data-answer="correct">Post Malone</button>
+            <button class="choice-button" data-answer="wrong">Damiano</button>
+            <button class="choice-button" data-answer="wrong">John Cena</button>
+        </div>
+        <div id="quiz-feedback"></div>
+        <button class="give-up-btn" id="give-up-btn">Give Up</button>
+    </div>
+
+    <img id="post-malone-img" src="images/post-malone.jpg" alt="Post Malone">
 
     <script>
         // Countdown Timer Script
@@ -154,6 +200,34 @@
             }
         }, 1000);
 
+        // Quiz Logic
+        const buttons = document.querySelectorAll('.choice-button');
+        const quizContainer = document.getElementById('quiz-container');
+        const quizFeedback = document.getElementById('quiz-feedback');
+        const giveUpBtn = document.getElementById('give-up-btn');
+        const postMaloneImg = document.getElementById('post-malone-img');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (button.dataset.answer === 'correct') {
+                    quizFeedback.innerHTML = "Hot! You're getting closer!";
+                } else {
+                    quizFeedback.innerHTML = "Cold! Try again!";
+                }
+            });
+        });
+
+        // Start quiz when any choice button is pressed
+        const startQuiz = () => {
+            quizContainer.style.display = "block";
+        }
+
+        // Give up and show Post Malone image
+        giveUpBtn.addEventListener('click', () => {
+            postMaloneImg.style.display = "block";
+            quizContainer.style.display = "none";
+        });
+        
         // Multiple Choice Buttons (all correct)
         const buttons = document.querySelectorAll('.choice-button');
         buttons.forEach(button => {
