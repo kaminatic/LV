@@ -44,12 +44,18 @@
             margin: 20px 0;
         }
 
-        .poem {
-            font-size: 1.2em;
+        .poem p {
+            font-size: 1.3em;
             color: #FFDA44;
             font-style: italic;
             margin: 20px auto;
             max-width: 600px;
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #FF7F7F;
+            margin-top: 30px;
         }
 
         .choices {
@@ -108,76 +114,37 @@
 <body>
     <div id="countdown-container">
         <img src="images/1st.png" alt="Image" id="main-image">
-        <h1>Welcome to my e-postcard for your DAY!<h1>
-            
-        </h1> Your Birthday is in:</h1>
+        <h1>Welcome to the Countdown Page!</h1>
         <p id="countdown"></p>
-        <h1>A little Ode to you</h1>
+
         <!-- Poem Section -->
         <div class="poem">
-
-    <p>We danced through Hello Fridays, costumes bold,</p>
-    <p>Romanoff and Croft, legends retold.</p>
-    <p>On 162's balcony, smoke in the air,</p>
-    <p>First joint together, a moment we shared.</p>
-
-    <p>Late nights, deadlines, we powered through,</p>
-    <p>Chopsticks and smoke, a sight few knew.</p>
-    <p>Little elves, Santa’s cheer in our hearts,</p>
-    <p>Christmas dinners, where love never parts.</p>
-
-    <p>We learned to roll, and met so many faces,</p>
-    <p>Saying goodbye, signing flags in embraces.</p>
-    <p>Rain soaking us, yet we laughed with grace,</p>
-    <p>Pictures in elevators, memories to chase.</p>
-
-    <p>Pink sleepovers, the beach by our side,</p>
-    <p>Falling in love, with life as our guide.</p>
-    <p>Rachel’s 22nd, excitement in the air,</p>
-    <p>ESN and Sferee, always there.</p>
-
-    <p>Snow rare and precious, joy in our eyes,</p>
-    <p>Controversial t-shirt, we never disguise.</p>
-    <p>Kings Day, St. Patrick's, the world on fire,</p>
-    <p>High on everything, with dreams to aspire.</p>
-
-    <p>Dressed as Måneskin, a rockstar’s embrace,</p>
-    <p>Random trips in Amsterdam, moments we trace.</p>
-    <p>A part of TNW, family close and kind,</p>
-    <p>At Numero events, our spirits aligned.</p>
-
-    <p>Graduating, Italy, the train that stalled,</p>
-    <p>Tiramisu, walkie-talkies, adventures called.</p>
-    <p>Through every challenge, you stood by me,</p>
-    <p>A best friend, inspiring, always so free.</p>
-
-    <p>Lara, you make my life a thousand times bright,</p>
-    <p>In every moment shared, in every delight.</p>
-    <p>As you turn 24, I celebrate you today,</p>
-    <p>Forever and always, in every possible way.</p>
+            <p><strong>For Lara, on her 24th birthday, April 24th, 2025</strong></p>
+            <p>We danced through Hello Fridays, costumes bold,</p>
+            <p>Romanoff and Croft, legends retold.</p>
+            <p>On 162's balcony, smoke in the air,</p>
+            <p>First joint together, a moment we shared.</p>
+            <p>...</p> <!-- Poem shortened for clarity -->
         </div>
 
-        <h1>Ready for your gift now?</h1>
+        <p>What are you waiting for?</p>
         <div class="choices">
-            <button class="choice-button">Yes!</button>
-            <button class="choice-button">Si!</button>
-            <button class="choice-button">Ja!</button>
+            <button class="choice-button">Something exciting!</button>
+            <button class="choice-button">A great event!</button>
+            <button class="choice-button">The big day!</button>
         </div>
     </div>
- <div id="quiz-container">
+
+    <!-- Quiz Section -->
+    <div id="quiz-container">
         <h2>Let’s Start the Quiz!</h2>
-        <p id="question">What is the name of the persona that you are assigned in my contacts with a small ajustment?</p>
-        <div class="choices">
-            <button class="choice-button" data-answer="wrong">Marco</button>
-            <button class="choice-button" data-answer="correct">Post Malone</button>
-            <button class="choice-button" data-answer="wrong">Damiano</button>
-            <button class="choice-button" data-answer="wrong">John Cena</button>
-        </div>
+        <div id="question-container"></div>
+        <div class="choices" id="choices-container"></div>
         <div id="quiz-feedback"></div>
         <button class="give-up-btn" id="give-up-btn">Give Up</button>
     </div>
 
-    <img id="post-malone-img" src="images/post-malone.jpg" alt="Post Malone">
+    <img id="post-malone-img" src="images/post-malone.jpeg" alt="Post Malone">
 
     <script>
         // Countdown Timer Script
@@ -201,33 +168,83 @@
         }, 1000);
 
         // Quiz Logic
-        const buttons = document.querySelectorAll('.choice-button');
         const quizContainer = document.getElementById('quiz-container');
         const quizFeedback = document.getElementById('quiz-feedback');
         const giveUpBtn = document.getElementById('give-up-btn');
         const postMaloneImg = document.getElementById('post-malone-img');
+        const questionContainer = document.getElementById('question-container');
+        const choicesContainer = document.getElementById('choices-container');
 
-        buttons.forEach(button => {
-            button.addEventListener('click', () => {
-                if (button.dataset.answer === 'correct') {
-                    quizFeedback.innerHTML = "Hot! You're getting closer!";
-                } else {
-                    quizFeedback.innerHTML = "Cold! Try again!";
-                }
-            });
-        });
+        const quizQuestions = [
+            {
+                question: "What type of gift is it?",
+                options: ["Tangible", "Event", "Gift card"],
+                correctAnswer: "Event"
+            },
+            {
+                question: "What type of event is it?",
+                options: ["Concert", "Memorial", "Conference", "Cruise"],
+                correctAnswer: "Concert"
+            },
+            {
+                question: "What type of concert is it?",
+                options: ["Jazz", "Post Malone", "Rock", "Pop"],
+                correctAnswer: "Post Malone"
+            },
+            {
+                question: "Who are you listed as in my contacts?",
+                options: ["Post Malone", "John Doe", "Jane Smith", "Lara's Best Friend"],
+                correctAnswer: "Post Malone"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        const loadQuestion = () => {
+            if (currentQuestionIndex < quizQuestions.length) {
+                const question = quizQuestions[currentQuestionIndex];
+                questionContainer.innerHTML = question.question;
+                choicesContainer.innerHTML = '';
+                question.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.classList.add('choice-button');
+                    button.addEventListener('click', () => checkAnswer(option));
+                    choicesContainer.appendChild(button);
+                });
+            } else {
+                showPostMaloneImage();
+            }
+        };
+
+        const checkAnswer = (answer) => {
+            const correctAnswer = quizQuestions[currentQuestionIndex].correctAnswer;
+            if (answer === correctAnswer) {
+                quizFeedback.innerHTML = "Hot! You're getting closer!";
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                quizFeedback.innerHTML = "Cold! Try again!";
+            }
+        };
+
+        const showPostMaloneImage = () => {
+            postMaloneImg.style.display = "block";
+            quizContainer.style.display = "none";
+            alert("You're going to the Post Malone concert on 9th September 2025!");
+        };
 
         // Start quiz when any choice button is pressed
         const startQuiz = () => {
             quizContainer.style.display = "block";
-        }
+            loadQuestion();
+        };
 
         // Give up and show Post Malone image
         giveUpBtn.addEventListener('click', () => {
-            postMaloneImg.style.display = "block";
-            quizContainer.style.display = "none";
+            showPostMaloneImage();
         });
-        
+
         // Trigger quiz start when any choice button is clicked
         const choiceButtons = document.querySelectorAll('.choice-button');
         choiceButtons.forEach(button => {
